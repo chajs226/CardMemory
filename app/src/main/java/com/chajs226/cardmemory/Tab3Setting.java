@@ -1,9 +1,18 @@
 package com.chajs226.cardmemory;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
+
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +22,8 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 /**
  * Created by amc on 2017-03-02.
  */
@@ -20,6 +31,7 @@ import java.util.TimerTask;
 public class Tab3Setting extends Fragment {
 
     private ProgressDialog progressDialog;
+    private MessageHandler messageHandler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +54,8 @@ public class Tab3Setting extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(true);
 
+        messageHandler = new MessageHandler();
+
         return rootView;
     }
 
@@ -52,6 +66,24 @@ public class Tab3Setting extends Fragment {
         thread.start();
     }
 
+    public void doNotify()
+    {
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        PendingIntent intent = PendingIntent.getActivity(getActivity(), 100, new Intent(getActivity(), NotiActivity.class), 0);
+
+        NotificationCompat.Builder nb = new NotificationCompat.Builder(getActivity());
+        nb.setSmallIcon(R.drawable.touchicon);
+        nb.setSound(sound);
+        nb.setContentTitle("knock knock..");
+        nb.setContentText("you've got a deliver");
+        nb.setContentIntent(intent);
+
+        NotificationManager nm = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+
+        nm.notify(100,nb.build());
+    }
+
+
     public class Timer implements Runnable {
 
         @Override
@@ -61,8 +93,31 @@ public class Tab3Setting extends Fragment {
                     Thread.sleep((1000));
                 } catch (Exception e) {
                 }
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("current count", i);
+
+                Message message = new Message();
+                message.setData(bundle);
+
+                messageHandler.sendMessage(message);
             }
             progressDialog.dismiss();
         }
     }
+
+    private class MessageHandler extends Handler {
+
+        @Override
+        public void handleMessage(Message msg) {
+            int currentCount = msg.getData().getInt("current count");
+            progressDialog.setMessage("Please wait in .. " + currentCount);
+
+            if(currentCount == 0) {
+                doNotify();
+            }
+        }
+    }
+
+
 }
