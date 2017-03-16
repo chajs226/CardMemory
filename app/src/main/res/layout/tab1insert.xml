@@ -8,12 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.chajs226.cardmemory.MainActivity$PlaceholderFragment">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tab1 Insert text"/>
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,16 +16,29 @@
         android:layout_below="@+id/section_label"
         android:layout_alignParentStart="true"
         android:layout_marginTop="14dp"
-        android:id="@+id/editText"
+        android:id="@+id/eTextContents"
         android:layout_alignParentEnd="true" />
 
-    <Button
-        android:text="Button"
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
+        android:text="Tab1 Insert text"
+        android:layout_below="@+id/eTextContents"
+        android:layout_alignEnd="@+id/btnInsert"
+        android:layout_marginTop="103dp" />
+
+    <Button
+        android:text="INSERT"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnInsert"
         android:visibility="visible"
         android:layout_width="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:elevation="0dp"
+        android:layout_below="@+id/textViewResult"
         android:layout_centerHorizontal="true"
-        android:elevation="0dp" />
+        android:layout_marginTop="114dp" />
+
+
 </RelativeLayout>
