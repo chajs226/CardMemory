@@ -11,20 +11,38 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public final class DBHelper extends SQLiteOpenHelper {
 
+    //version number to upgrade database version
+    //each time if you Add, Edit table, you need to change the
+    //version number.
+    private static final int DATABASE_VERSION = 1;
+
+    // Database Name
+    private static final String DATABASE_NAME = "cardmemory.db";
+
     // DBHelper 생성자로 관리할 DB 이름과 버전 정보를 받음
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public DBHelper(Context context ) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     // DB를 새로 생성할 때 호출되는 함수
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE CONTENTSLIST ( _id INTEGER PRIMARY KEY AUTOINCREMENT, kind TEXT NOT NULL, contents TEXT );");
+        //All necessary tables you like to create will create here
+
+        String CREATE_TABLE = "CREATE TABLE CARDS ( _id INTEGER PRIMARY KEY AUTOINCREMENT, kind TEXT NOT NULL, contents TEXT );";
+
+        db.execSQL(CREATE_TABLE);
+
     }
 
     // DB 업그레이드를 위해 버전이 변경될 때 호출되는 함수
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Drop older table if existed, all data will be gone!!!
+        db.execSQL("DROP TABLE IF EXISTS CARDS");
+
+        // Create tables again
+        onCreate(db);
 
     }
 

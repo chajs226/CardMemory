@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 public class Tab1Insert extends Fragment{
 
-    private DBHelper dbHelper;
-
     EditText etContents;
     TextView tvResult;
 
@@ -26,7 +24,7 @@ public class Tab1Insert extends Fragment{
         //inflate : xml 파일을 통해 객체를 생성해 화면에 보여주느 ㄴ것..
         View rootView = inflater.inflate(R.layout.tab1insert, container, false);
 
-        dbHelper = new DBHelper(getActivity(), "cardMemory.db", null, 1);
+
 
         etContents = (EditText)rootView.findViewById(R.id.eTextContents);
         tvResult = (TextView)rootView.findViewById(R.id.textViewResult);
@@ -44,9 +42,11 @@ public class Tab1Insert extends Fragment{
 
     public void onButtonClicked(View view)
     {
+        CardDAO card = new CardDAO(getActivity());
+
         String contents = etContents.getText().toString();
 
-        dbHelper.insert("TEXT", contents);
-        tvResult.setText(dbHelper.getResult());
+        card.insert("TEXT", contents);
+        tvResult.setText(card.getResult());
     }
 }
