@@ -3,6 +3,8 @@ package com.chajs226.cardmemory;
 /**
  * Created by amc on 2017-03-02.
  */
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,6 +34,7 @@ public class Tab1Insert extends Fragment{
         Button button = (Button) rootView.findViewById(R.id.btnInsert);
         button.setOnClickListener(new View.OnClickListener()
         {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 onButtonClicked(v);
@@ -40,6 +43,7 @@ public class Tab1Insert extends Fragment{
         return rootView;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void onButtonClicked(View view)
     {
         CardDAO card = new CardDAO(getActivity());
@@ -47,6 +51,6 @@ public class Tab1Insert extends Fragment{
         String contents = etContents.getText().toString();
 
         card.insert("TEXT", contents);
-        tvResult.setText(card.getResult());
+        //tvResult.setText(card.getResult());
     }
 }

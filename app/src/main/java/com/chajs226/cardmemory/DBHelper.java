@@ -14,7 +14,7 @@ public final class DBHelper extends SQLiteOpenHelper {
     //version number to upgrade database version
     //each time if you Add, Edit table, you need to change the
     //version number.
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     // Database Name
     private static final String DATABASE_NAME = "cardmemory.db";
@@ -29,7 +29,7 @@ public final class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //All necessary tables you like to create will create here
 
-        String CREATE_TABLE = "CREATE TABLE CARDS ( _id INTEGER PRIMARY KEY AUTOINCREMENT, kind TEXT NOT NULL, contents TEXT );";
+        String CREATE_TABLE = "CREATE TABLE CARDS ( _id INTEGER PRIMARY KEY AUTOINCREMENT, kind TEXT NOT NULL, contents TEXT, updt DATETIME DEFAULT CURRENT_TIMESTAMP );";
 
         db.execSQL(CREATE_TABLE);
 
@@ -46,11 +46,11 @@ public final class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insert(String kind, String contents) {
+/*    public void insert(String kind, String contents) {
         // 읽고 쓰기가 가능하게 DB 열기
         SQLiteDatabase db = getWritableDatabase();
         // DB에 입력한 값으로 행 추가
-        db.execSQL("INSERT INTO CONTENTSLIST VALUES(null, '" + kind + "', " + contents + ";");
+        db.execSQL("INSERT INTO CONTENTSLIST VALUES(null, '" + kind + "', " + contents + ", null);");
         db.close();
     }
 
@@ -81,9 +81,11 @@ public final class DBHelper extends SQLiteOpenHelper {
                     + cursor.getString(1)
                     + " | "
                     + cursor.getInt(2)
+                    + " | "
+                    + cursor.getString(3)
                     + "\n";
         }
 
         return result;
-    }
+    }*/
 }
