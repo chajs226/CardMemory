@@ -71,17 +71,20 @@ public final class CardDAO {
     }
 
 
-    public List<CardVO> getResult() {
+    public ArrayList<CardVO> getResult() {
         // 읽기가 가능하게 DB 열기
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         //String result = "";
-        CardVO cardVo = new CardVO();
-        List cardVOList = new ArrayList();
 
+        ArrayList cardVOList = new ArrayList();
+
+        cardVOList.clear();
         // DB에 있는 데이터를 쉽게 처리하기 위해 Cursor를 사용하여 테이블에 있는 모든 데이터 출력
         Cursor cursor = db.rawQuery("SELECT * FROM CARDS", null);
         while (cursor.moveToNext()) {
+
+            CardVO cardVo = new CardVO();
 
             cardVo.setId(cursor.getInt(0));
             cardVo.setKind(cursor.getString(1));
