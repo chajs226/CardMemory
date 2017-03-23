@@ -48,8 +48,8 @@
 
         <TextView
             android:text="Received"
-            android:layout_width="157dp"
-            android:layout_height="74dp"
+            android:layout_width="match_parent"
+            android:layout_height="257dp"
             android:id="@+id/textView" />
     </FrameLayout>
 

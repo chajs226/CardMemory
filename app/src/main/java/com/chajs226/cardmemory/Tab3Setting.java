@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.Date;
 import java.util.Timer;
@@ -33,6 +35,11 @@ public class Tab3Setting extends Fragment {
     private ProgressDialog progressDialog;
     private MessageHandler messageHandler;
 
+    private int timeCount;
+    EditText editTextTimeCount;
+    TextView textViewStatus;
+    private int stopbit = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,14 +47,29 @@ public class Tab3Setting extends Fragment {
         //inflate : xml 파일을 통해 객체를 생성해 화면에 보여주느 ㄴ것..
         View rootView = inflater.inflate(R.layout.tab3setting, container, false);
 
-        Button button = (Button) rootView.findViewById(R.id.btnTimer);
-        button.setOnClickListener(new View.OnClickListener()
+        //Timer 실행 버튼
+        Button buttonTimer = (Button) rootView.findViewById(R.id.btnTimer);
+        buttonTimer.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                onButtonClicked(v);
+                onTimerButtonClicked(v);
             }
         });
+
+        //Cancel 버튼
+        Button buttonCancel = (Button) rootView.findViewById(R.id.btnCancel);
+        buttonCancel.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                onCancelButtonClicked(v);
+            }
+        });
+
+        editTextTimeCount = (EditText) rootView.findViewById(R.id.editTextTimeCount);
+        textViewStatus = (TextView) rootView.findViewById(R.id.textViewStatus);
+
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("count");
@@ -59,11 +81,24 @@ public class Tab3Setting extends Fragment {
         return rootView;
     }
 
-    public void onButtonClicked(View view)
+    public void onTimerButtonClicked(View view)
     {
-        progressDialog.show();
+        int timeCountM = Integer.parseInt(editTextTimeCount.getText().toString());
+        timeCount = timeCountM * 60;
+
+        //progressDialog.show();
+        textViewStatus.setText("알림이 " + String.valueOf(timeCountM) + "분 설정되었습니다.");
+
+        stopbit = 0;
         Thread thread = new Thread(new Timer());
         thread.start();
+    }
+
+    public void onCancelButtonClicked(View view)
+    {
+        stopbit = 1;
+
+        textViewStatus.setText("알림 설정이 취소되었습니다.");
     }
 
     public void doNotify()
@@ -88,22 +123,30 @@ public class Tab3Setting extends Fragment {
 
         @Override
         public void run() {
-            for (int i = 5; i >= 0; i--) {
-                try {
-                    Thread.sleep((1000));
-                } catch (Exception e) {
+
+            while (true) {
+                for (int i = timeCount; i >= 0; i--) {
+                    try {
+                        Thread.sleep((1000));
+                    } catch (Exception e) {
+                    }
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("current count", i);
+
+                    Message message = new Message();
+                    message.setData(bundle);
+
+                    messageHandler.sendMessage(message);
                 }
+                progressDialog.dismiss();
 
-                Bundle bundle = new Bundle();
-                bundle.putInt("current count", i);
+                if(stopbit == 1)
+                    break;
 
-                Message message = new Message();
-                message.setData(bundle);
-
-                messageHandler.sendMessage(message);
             }
-            progressDialog.dismiss();
         }
+
     }
 
     private class MessageHandler extends Handler {
