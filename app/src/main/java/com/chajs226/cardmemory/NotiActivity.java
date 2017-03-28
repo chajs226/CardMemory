@@ -1,18 +1,29 @@
 package com.chajs226.cardmemory;
 
 import android.annotation.SuppressLint;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
 public class NotiActivity extends AppCompatActivity {
+
+    int cardCount = 0;
+    //카드 리스트
+    ArrayList<CardVO> list;
+    //컨텐트 텍스트 뷰
+    TextView cardTextView;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -98,7 +109,10 @@ public class NotiActivity extends AppCompatActivity {
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toggle();
+                //toggle();
+                //Toast.makeText(NotiActivity.this, "aaa", Toast.LENGTH_SHORT).show();
+                cardCount++;
+                LoadCard();
             }
         });
 
@@ -106,7 +120,37 @@ public class NotiActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
+        cardTextView = (TextView) findViewById(R.id.fullscreen_content);
+
+        //리스트에 아이템 추가
+        CardDAO cardDao = new CardDAO(this);
+
+
+        //DB 에 저장되어 있는 리스트 조회
+        list = cardDao.getResult();
+
+        LoadCard();
+
     }
+
+    //list에 있는 카드를 하나씩 가져오는 함수
+    private void LoadCard()
+    {
+        if (cardCount < list.size()) {
+            if ("TEXT".equals(list.get(cardCount).getKind().trim())) {
+                cardTextView.setText(list.get(cardCount).getContents());
+            } else {
+
+            }
+        }
+        else
+        {
+            cardCount = 0;
+            LoadCard();
+        }
+    }
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
