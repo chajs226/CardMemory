@@ -84,7 +84,7 @@ public class Tab3Setting extends Fragment {
     public void onTimerButtonClicked(View view)
     {
         int timeCountM = Integer.parseInt(editTextTimeCount.getText().toString());
-        timeCount = timeCountM * 60;
+        timeCount = timeCountM * 10;
 
         //progressDialog.show();
         textViewStatus.setText("알림이 " + String.valueOf(timeCountM) + "분 설정되었습니다.");
