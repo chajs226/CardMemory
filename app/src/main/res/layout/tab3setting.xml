@@ -15,6 +15,7 @@
         android:id="@+id/textViewStatus"
         android:layout_marginTop="181dp"
         android:layout_below="@+id/editTextTimeCount"
+        android:gravity="center"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -22,10 +23,10 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="false"
         android:id="@+id/editTextTimeCount"
-        android:layout_alignEnd="@+id/btnCancel" />
+        android:layout_alignEnd="@+id/btnCancel"
+        android:layout_alignStart="@+id/btnTimer" />
 
     <Button
         android:text="Timer"
