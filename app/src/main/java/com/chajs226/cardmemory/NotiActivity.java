@@ -1,6 +1,8 @@
 package com.chajs226.cardmemory;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -119,7 +122,16 @@ public class NotiActivity extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        //findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        Button button = (Button) findViewById(R.id.btnExit);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                onButtonClicked(v);
+            }
+        });
 
         cardTextView = (TextView) findViewById(R.id.fullscreen_content);
 
@@ -132,6 +144,12 @@ public class NotiActivity extends AppCompatActivity {
 
         LoadCard();
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void onButtonClicked(View view)
+    {
+        finish();
     }
 
     //list에 있는 카드를 하나씩 가져오는 함수

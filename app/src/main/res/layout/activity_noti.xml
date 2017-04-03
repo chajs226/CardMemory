@@ -22,9 +22,19 @@
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
+
+    <Button
+        android:id="@+id/btnExit"
+        style="?metaButtonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="EXIT"
+        android:background="@android:color/darker_gray" />
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="672dp"
         android:fitsSystemWindows="true">
 
         <LinearLayout
@@ -37,13 +47,6 @@
             android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <Button
-                android:id="@+id/dummy_button"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:text="@string/dummy_button" />
-
         </LinearLayout>
 
 
@@ -52,6 +55,8 @@
             android:layout_height="wrap_content"
             app:srcCompat="@android:color/background_light"
             android:id="@+id/imageView" />
+
+
     </FrameLayout>
 
 </FrameLayout>
