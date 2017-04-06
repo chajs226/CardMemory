@@ -13,18 +13,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="4"
+        android:background="?android:attr/activatedBackgroundIndicator"
         android:weightSum="1">
     <Button
         android:text="List"
-        android:layout_width="match_parent"
+        android:layout_width="196dp"
         android:layout_height="wrap_content"
         android:id="@+id/btnList" />
 
-    <ListView
+        <Button
+            android:text="Delete"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnDelete" />
+
+        <ListView
         android:id="@+id/listview1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:choiceMode="multipleChoice"
+        android:background="@drawable/selector"/>
+
+
     </LinearLayout>
 
 </RelativeLayout>

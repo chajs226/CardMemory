@@ -6,6 +6,7 @@ package com.chajs226.cardmemory;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,11 @@ public class ListViewAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
 
+    //private SparseBooleanArray mSelectedItemsIds;
+
     // ListViewAdapter의 생성자
     public ListViewAdapter() {
-
+  //      mSelectedItemsIds = new SparseBooleanArray();
     }
 
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
@@ -81,4 +84,17 @@ public class ListViewAdapter extends BaseAdapter {
 
         listViewItemList.add(item);
     }
+
+  /*  public void toggleSelection(int position) {
+        selectView(position, !mSelectedItemsIds.get(position));
+    }
+
+    public void selectView(int position, boolean value) {
+        if (value)
+            mSelectedItemsIds.put(position, value);
+        else
+            mSelectedItemsIds.delete(position);
+        notifyDataSetChanged();
+    }*/
+
 }
