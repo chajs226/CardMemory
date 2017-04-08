@@ -12,6 +12,7 @@ public class ListViewItem {
     private Drawable iconDrawable ;
     private String mUpdt ;
     private String mContents ;
+    private int mId;
 
     public void setIcon(Drawable icon) {
         iconDrawable = icon ;
@@ -22,6 +23,9 @@ public class ListViewItem {
     public void setContents(String contents) {
         mContents = contents ;
     }
+    public void setId(int id) {
+        mId = id ;
+    }
 
     public Drawable getIcon() {
         return this.iconDrawable ;
@@ -31,5 +35,8 @@ public class ListViewItem {
     }
     public String getContents() {
         return this.mContents ;
+    }
+    public int getId() {
+        return this.mId ;
     }
 }

@@ -75,26 +75,22 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(Drawable icon, String updt, String contens) {
+    public void addItem(Drawable icon, String updt, String contens, int id) {
         ListViewItem item = new ListViewItem();
 
         item.setIcon(icon);
         item.setUpdt(updt);
         item.setContents(contens);
+        item.setId(id);
 
         listViewItemList.add(item);
     }
 
-  /*  public void toggleSelection(int position) {
-        selectView(position, !mSelectedItemsIds.get(position));
-    }
+    public int getItemVOId(int position)
+    {
+        int id = listViewItemList.get(position).getId();
 
-    public void selectView(int position, boolean value) {
-        if (value)
-            mSelectedItemsIds.put(position, value);
-        else
-            mSelectedItemsIds.delete(position);
-        notifyDataSetChanged();
-    }*/
+        return id;
+    }
 
 }

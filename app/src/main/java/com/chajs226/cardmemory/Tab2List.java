@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,6 +33,9 @@ public class Tab2List extends Fragment {
     ListView listView;
     ListViewAdapter adapter;
     ArrayList<CardVO> list;
+    int [] selectedList;
+    int count = 0;
+    SparseBooleanArray checkedItemPositions;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -82,7 +87,6 @@ public class Tab2List extends Fragment {
                 final int checkedCount = listView.getCheckedItemCount();
                 mode.setTitle(checkedCount + " Selected");
 
-                //adapter.toggleSelection(position);
             }
 
             @Override
@@ -90,7 +94,18 @@ public class Tab2List extends Fragment {
                 // Respond to clicks on the actions in the CAB
                 switch (item.getItemId()) {
                     case R.id.delete:
-//                        deleteSelectedItems();
+                        count = listView.getCount();
+                        checkedItemPositions = listView.getCheckedItemPositions();
+                        selectedList = new int[listView.getCheckedItemCount()];
+                        int index = 0;
+                        for (int i=0; i<count; i++) {
+                            if(checkedItemPositions.get(i)) {
+                                selectedList[index] = adapter.getItemVOId(i);
+                                index++;
+                                Log.e("SelectedList", selectedList.toString());
+                            }
+                        }
+                        deleteSelectedItems(selectedList);
                         mode.finish(); // Action picked, so close the CAB
                         return true;
                     default:
@@ -124,9 +139,6 @@ public class Tab2List extends Fragment {
         return rootView;
     }
 
-
-
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void onButtonClicked(View view)
     {
@@ -147,53 +159,21 @@ public class Tab2List extends Fragment {
         {
             if("TEXT".equals(list.get(i).getKind().trim()))
             {
-                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.kindtexticon), list.get(i).getUpdt().toString(), list.get(i).getContents());
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.kindtexticon), list.get(i).getUpdt().toString(), list.get(i).getContents(), list.get(i).getId());
             }
             else
             {
-                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.kindimageicon), list.get(i).getUpdt().toString(), list.get(i).getContents());
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.kindimageicon), list.get(i).getUpdt().toString(), list.get(i).getContents(), list.get(i).getId());
             }
         }
 
     }
 
-/*
-    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+    public void deleteSelectedItems(int [] list)
+    {
+            //DELETE DAO 구현 필요.
+    }
 
-        // Called when the action mode is created; startActionMode() was called
-        @Override
-        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            // Inflate a menu resource providing context menu items
-            MenuInflater inflater = mode.getMenuInflater();
-            inflater.inflate(R.menu.context_menu, menu);
-            return true;
-        }
-
-        // Called each time the action mode is shown. Always called after onCreateActionMode, but
-        // may be called multiple times if the mode is invalidated.
-        @Override
-        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            return false; // Return false if nothing is done
-        }
-
-        // Called when the user selects a contextual menu item
-        @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.delete:
-                    Toast.makeText(getActivity(), "aa", Toast.LENGTH_SHORT).show();
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
-        // Called when the user exits the action mode
-        @Override
-        public void onDestroyActionMode(ActionMode mode) {
-            mActionMode = null;
-        }
-    };*/
 
 
 }
