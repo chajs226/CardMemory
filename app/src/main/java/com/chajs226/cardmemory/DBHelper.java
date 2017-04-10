@@ -46,46 +46,4 @@ public final class DBHelper extends SQLiteOpenHelper {
 
     }
 
-/*    public void insert(String kind, String contents) {
-        // 읽고 쓰기가 가능하게 DB 열기
-        SQLiteDatabase db = getWritableDatabase();
-        // DB에 입력한 값으로 행 추가
-        db.execSQL("INSERT INTO CONTENTSLIST VALUES(null, '" + kind + "', " + contents + ", null);");
-        db.close();
-    }
-
-    public void update(String kind, String contents, int id) {
-        SQLiteDatabase db = getWritableDatabase();
-        // 입력한 항목과 일치하는 행의 가격 정보 수정
-        db.execSQL("UPDATE CONTENTSLIST SET kind= '" + kind + "' , contents = '" + contents + "' WHERE _id = " + id + ";");
-        db.close();
-    }
-
-    public void delete(int id) {
-        SQLiteDatabase db = getWritableDatabase();
-        // 입력한 항목과 일치하는 행 삭제
-        db.execSQL("DELETE FROM CONTENTSLIST WHERE _id=" + id + ";");
-        db.close();
-    }
-
-    public String getResult() {
-        // 읽기가 가능하게 DB 열기
-        SQLiteDatabase db = getReadableDatabase();
-        String result = "";
-
-        // DB에 있는 데이터를 쉽게 처리하기 위해 Cursor를 사용하여 테이블에 있는 모든 데이터 출력
-        Cursor cursor = db.rawQuery("SELECT * FROM CONTENTSLIST", null);
-        while (cursor.moveToNext()) {
-            result += cursor.getString(0)
-                    + " : "
-                    + cursor.getString(1)
-                    + " | "
-                    + cursor.getInt(2)
-                    + " | "
-                    + cursor.getString(3)
-                    + "\n";
-        }
-
-        return result;
-    }*/
 }

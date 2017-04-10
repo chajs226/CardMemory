@@ -142,8 +142,34 @@ public class Tab2List extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void onButtonClicked(View view)
     {
+  /*      listView.setAdapter(null);
 
+        //Adapter 생성
+        adapter = new ListViewAdapter();
+        listView.setAdapter(adapter);
 
+        //리스트에 아이템 추가
+        CardDAO cardDao = new CardDAO(getActivity());
+
+        list = cardDao.getResult();
+
+        for(int i=0; i<list.size(); i++)
+        {
+            if("TEXT".equals(list.get(i).getKind().trim()))
+            {
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.kindtexticon), list.get(i).getUpdt().toString(), list.get(i).getContents(), list.get(i).getId());
+            }
+            else
+            {
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.kindimageicon), list.get(i).getUpdt().toString(), list.get(i).getContents(), list.get(i).getId());
+            }
+        }*/
+        SelectList();
+
+    }
+
+    public void SelectList()
+    {
         listView.setAdapter(null);
 
         //Adapter 생성
@@ -166,12 +192,19 @@ public class Tab2List extends Fragment {
                 adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.kindimageicon), list.get(i).getUpdt().toString(), list.get(i).getContents(), list.get(i).getId());
             }
         }
-
     }
 
     public void deleteSelectedItems(int [] list)
     {
-            //DELETE DAO 구현 필요.
+        CardDAO cardDAO = new CardDAO(getActivity());
+
+        for (int i=0; i<list.length; i++)
+        {
+            cardDAO.delete(list[i]);
+        }
+
+        SelectList();
+
     }
 
 

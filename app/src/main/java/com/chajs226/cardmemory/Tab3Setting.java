@@ -39,6 +39,7 @@ public class Tab3Setting extends Fragment {
     EditText editTextTimeCount;
     TextView textViewStatus;
     private int stopbit = 0;
+    int timeCountM = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,12 +79,21 @@ public class Tab3Setting extends Fragment {
 
         messageHandler = new MessageHandler();
 
+        if (timeCountM == 0)
+        {
+            textViewStatus.setText("알림 설정이 되어있지 않습니다.");
+        }
+        else
+        {
+            textViewStatus.setText("알림이 " + String.valueOf(timeCountM) + "분 설정되었습니다.");
+        }
+
         return rootView;
     }
 
     public void onTimerButtonClicked(View view)
     {
-        int timeCountM = Integer.parseInt(editTextTimeCount.getText().toString());
+        timeCountM = Integer.parseInt(editTextTimeCount.getText().toString());
         timeCount = timeCountM * 10;
 
         //progressDialog.show();

@@ -15,18 +15,18 @@
         android:id="@+id/textViewStatus"
         android:layout_marginTop="181dp"
         android:layout_below="@+id/editTextTimeCount"
-        android:gravity="center"
         android:layout_centerHorizontal="true" />
 
-    <EditText
+    <TextView
+        android:text="타이머 설정"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:layout_alignParentTop="false"
-        android:id="@+id/editTextTimeCount"
-        android:layout_alignEnd="@+id/btnCancel"
-        android:layout_alignStart="@+id/btnTimer" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textSize="30sp"
+        android:id="@+id/textView"
+        android:layout_above="@+id/textViewStatus"
+        android:layout_toStartOf="@+id/textViewStatus" />
 
     <Button
         android:text="Timer"
@@ -35,11 +35,10 @@
         android:id="@+id/btnTimer"
         android:visibility="visible"
         android:elevation="0dp"
-        android:layout_marginLeft="221dp"
-        android:layout_marginStart="17dp"
-        android:layout_alignBaseline="@+id/btnCancel"
-        android:layout_alignBottom="@+id/btnCancel"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="49dp"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/editTextTimeCount" />
 
     <Button
         android:text="Cancel"
@@ -48,9 +47,9 @@
         android:id="@+id/btnCancel"
         android:visibility="visible"
         android:elevation="0dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/editTextTimeCount"
+        android:layout_alignBaseline="@+id/btnTimer"
+        android:layout_alignBottom="@+id/btnTimer"
+        android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/textViewStatus" />
 
     <TextView
@@ -61,7 +60,17 @@
         android:textAppearance="@android:style/TextAppearance"
         android:textSize="30sp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/textViewStatus" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextTimeCount"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/btnCancel" />
 
 
 </RelativeLayout>

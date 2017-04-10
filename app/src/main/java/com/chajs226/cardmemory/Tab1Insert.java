@@ -50,7 +50,18 @@ public class Tab1Insert extends Fragment{
 
         String contents = etContents.getText().toString();
 
-        card.insert("TEXT", contents);
-        //tvResult.setText(card.getResult());
+        int rtn = card.insert("TEXT", contents);
+
+        if(rtn == 0)
+        {
+            tvResult.setText("저장되었습니다.");
+            etContents.setText("");
+        }
+        else
+        {
+            tvResult.setText("저장이 실패했습니다.");
+            etContents.setText("");
+        }
+
     }
 }

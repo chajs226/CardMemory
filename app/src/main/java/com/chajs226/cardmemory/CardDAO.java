@@ -27,27 +27,31 @@ public final class CardDAO {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public int insert(String kind, String contents) {
 
-        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //String strDate = sdf.format(new Date());
+        int rtn = 0;
         Date date = new Date();
 
-        //Open connection to write data
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("kind", kind);
         values.put("contents", contents);
         values.put("updt", DateFormat.getDateTimeInstance().format(date));
 
-        // Inserting Row
-        long cards_Id = db.insert("CARDS", null, values);
-        db.close(); // Closing database connection
-        return (int) cards_Id;
+        //Open connection to write data
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        try {
+            long cards_Id = db.insert("CARDS", null, values);
+        } catch (Exception e) {
+            rtn = -1;
+        } finally {
+            db.close(); // Closing database connection
+        }
+
+        return rtn;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void update(String kind, String contents, int id) {
 
-        Date date = new Date();
+/*        Date date = new Date();
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -59,23 +63,28 @@ public final class CardDAO {
 
         // It's a good practice to use parameter ?, instead of concatenate string
         db.update("CARDS", values, "ID = ?", new String[] { String.valueOf(id) });
-        db.close(); // Closing database connection
+        db.close(); // Closing database connection*/
     }
 
     public void delete(int id) {
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        // It's a good practice to use parameter ?, instead of concatenate string
-        db.delete("CARDS", "ID = ?", new String[] { String.valueOf(id) });
-        db.close(); // Closing database connection
+        try {
+            // It's a good practice to use parameter ?, instead of concatenate string
+            db.delete("CARDS", "_ID = ?", new String[] { String.valueOf(id) });
+        } catch (Exception e ) {
+            ;
+        } finally {
+            db.close(); // Closing database connection
+        }
+
+
     }
 
 
     public ArrayList<CardVO> getResult() {
         // 읽기가 가능하게 DB 열기
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        //String result = "";
 
         ArrayList cardVOList = new ArrayList();
 
@@ -92,47 +101,9 @@ public final class CardDAO {
             cardVo.setUpdt(cursor.getString(3));
 
             cardVOList.add(cardVo);
-            /*result += cursor.getString(0)
-                    + " : "
-                    + cursor.getString(1)
-                    + " | "
-                    + cursor.getString(2)
-                    + " | "
-                    + cursor.getString(3)
-                    + "\n";*/
+
         }
         return cardVOList;
     }
 
-/*    public ArrayList<HashMap<String, String>>  getStudentList() {
-        //Open connection to read only
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String selectQuery =  "SELECT  " +
-                Student.KEY_ID + "," +
-                Student.KEY_name + "," +
-                Student.KEY_email + "," +
-                Student.KEY_age +
-                " FROM " + Student.TABLE;
-
-        //Student student = new Student();
-        ArrayList<HashMap<String, String>> studentList = new ArrayList<HashMap<String, String>>();
-
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        // looping through all rows and adding to list
-
-        if (cursor.moveToFirst()) {
-            do {
-                HashMap<String, String> student = new HashMap<String, String>();
-                student.put("id", cursor.getString(cursor.getColumnIndex(Student.KEY_ID)));
-                student.put("name", cursor.getString(cursor.getColumnIndex(Student.KEY_name)));
-                studentList.add(student);
-
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
-        return studentList;
-
-    }*/
 }

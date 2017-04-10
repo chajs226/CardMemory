@@ -17,15 +17,9 @@
         android:weightSum="1">
     <Button
         android:text="List"
-        android:layout_width="196dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnList" />
-
-        <Button
-            android:text="Delete"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnDelete" />
 
         <ListView
         android:id="@+id/listview1"
