@@ -8,25 +8,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.chajs226.cardmemory.MainActivity$PlaceholderFragment">
 
-    <TextView
-        android:text="TextView"
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewStatus"
-        android:layout_marginTop="181dp"
-        android:layout_below="@+id/editTextTimeCount"
-        android:layout_centerHorizontal="true" />
+        android:inputType="numberDecimal"
+        android:ems="5"
+        android:id="@+id/editTextTimeCount"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textViewTitle" />
 
     <TextView
-        android:text="타이머 설정"
+        android:text="분"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textSize="30sp"
-        android:id="@+id/textView"
-        android:layout_above="@+id/textViewStatus"
-        android:layout_toStartOf="@+id/textViewStatus" />
+        android:id="@+id/textViewM"
+        android:textAppearance="@android:style/TextAppearance"
+        android:textSize="25sp"
+        android:layout_toRightOf="@+id/editTextTimeCount"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/editTextTimeCount"
+        android:layout_alignParentTop="true" />
 
     <Button
         android:text="Timer"
@@ -35,10 +36,10 @@
         android:id="@+id/btnTimer"
         android:visibility="visible"
         android:elevation="0dp"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/textViewTitle"
         android:layout_marginTop="49dp"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/editTextTimeCount" />
+        android:layout_toStartOf="@+id/textViewStatus" />
 
     <Button
         android:text="Cancel"
@@ -50,27 +51,27 @@
         android:layout_alignBaseline="@+id/btnTimer"
         android:layout_alignBottom="@+id/btnTimer"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/textViewStatus" />
+        android:layout_alignParentBottom="?android:attr/windowCloseOnTouchOutside"
+        android:layout_toEndOf="@+id/textViewTitle" />
 
     <TextView
-        android:text="분"
+        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:textAppearance="@android:style/TextAppearance"
+        android:id="@+id/textViewStatus"
+        android:layout_marginTop="181dp"
+        android:layout_below="@+id/textViewTitle"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="타이머 설정"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="30sp"
+        android:id="@+id/textViewTitle"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/textViewStatus" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editTextTimeCount"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/btnCancel" />
-
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/textViewStatus"
+        android:layout_alignBottom="@+id/editTextTimeCount" />
 
 </RelativeLayout>

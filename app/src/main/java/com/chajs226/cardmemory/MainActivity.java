@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,8 +69,22 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        switch(keyCode)
+        {
+            case KeyEvent.KEYCODE_BACK:
+
+                moveTaskToBack(true);
+
+                return true;
+        }
+        return false;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
