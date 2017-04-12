@@ -8,59 +8,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.chajs226.cardmemory.MainActivity$PlaceholderFragment">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="5"
-        android:id="@+id/editTextTimeCount"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textViewTitle" />
-
-    <TextView
-        android:text="분"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewM"
-        android:textAppearance="@android:style/TextAppearance"
-        android:textSize="25sp"
-        android:layout_toRightOf="@+id/editTextTimeCount"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/editTextTimeCount"
-        android:layout_alignParentTop="true" />
-
-    <Button
-        android:text="Timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnTimer"
-        android:visibility="visible"
-        android:elevation="0dp"
-        android:layout_below="@+id/textViewTitle"
-        android:layout_marginTop="49dp"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/textViewStatus" />
-
-    <Button
-        android:text="Cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnCancel"
-        android:visibility="visible"
-        android:elevation="0dp"
-        android:layout_alignBaseline="@+id/btnTimer"
-        android:layout_alignBottom="@+id/btnTimer"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="?android:attr/windowCloseOnTouchOutside"
-        android:layout_toEndOf="@+id/textViewTitle" />
-
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewStatus"
-        android:layout_marginTop="181dp"
-        android:layout_below="@+id/textViewTitle"
+        android:layout_marginBottom="175dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -71,7 +25,55 @@
         android:id="@+id/textViewTitle"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/textViewStatus"
-        android:layout_alignBottom="@+id/editTextTimeCount" />
+        android:layout_alignBottom="@+id/btnTimer"
+        android:layout_toStartOf="@+id/btnCancel" />
+
+    <Button
+        android:text="Timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnTimer"
+        android:visibility="visible"
+        android:elevation="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/textViewStatus" />
+
+    <Button
+        android:text="Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCancel"
+        android:visibility="visible"
+        android:elevation="0dp"
+        android:layout_alignBaseline="@+id/textViewM"
+        android:layout_alignBottom="@+id/textViewM"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/btnTimer" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="5"
+        android:id="@+id/editTextTimeCount"
+        android:visibility="visible"
+        android:layout_below="@+id/btnTimer"
+        android:layout_marginTop="13dp"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/textViewStatus" />
+
+    <TextView
+        android:text="분"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewM"
+        android:textAppearance="@android:style/TextAppearance"
+        android:textSize="25sp"
+        android:visibility="visible"
+        android:textAlignment="viewStart"
+        android:layout_alignTop="@+id/editTextTimeCount"
+        android:layout_alignBottom="@+id/editTextTimeCount"
+        android:layout_toEndOf="@+id/editTextTimeCount" />
 
 </RelativeLayout>
